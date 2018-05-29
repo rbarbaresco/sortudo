@@ -8,5 +8,5 @@ def sort(elements):
             sorted_list[position] = sorted_list[position - 1]
             position -= 1
 
-            sorted_list[position] = current_element
+        sorted_list[position] = current_element
     return sorted_list
