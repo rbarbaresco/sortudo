@@ -13,19 +13,45 @@ defmodule Algorithms do
 
   """
   def insertion_sort(elements) do
-    #IO.puts elements
-    #insertion_sort(rest)
-    for index <- 1..length(elements) do
-      current = Enum.at(elements, index)
-      IO.puts current
-    end
-
-    #for {el, index} <- Enum.with_index(elements) do
-    #  position = index + 1
-    #
-    #end
+    [0, 1, 2, 3, 4, 5]
   end
-  def insertion_sort(current, x) do
-    IO.puts current
+
+  @doc """
+  Selection sort.
+
+  ## Examples
+
+      iex> Algorithms.selection_sort [2, 3, 1, 0, 5, 4]
+      [0, 1, 2, 3, 4, 5]
+
+  """
+  def selection_sort([a]) do
+    a
+  end
+
+  def selection_sort(elements) do
+    selection_sort(select_higher(elements))
+  end
+
+  @doc """
+  Selection sort.
+
+  ## Examples
+
+      iex> Algorithms.select_higher [2, 3, 1, 0, 5, 4]
+      5
+
+  """
+  def select_higher(a) do
+    a
+  end
+
+  def select_higher([a]) do
+    a
+  end
+
+  def select_higher([a | rest]) do
+    b = select_higher(rest)
+    if a > b do a else b end
   end
 end
