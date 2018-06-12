@@ -1,15 +1,6 @@
 # -*- coding: utf-8 -*-
 from python.algorithms.map import Map
 
-# graph is in adjacent list representation
-graph = {
-        '1': ['2', '3', '4'],
-        '2': ['5', '6'],
-        '5': ['9', '10'],
-        '4': ['7', '8'],
-        '7': ['11', '12']
-        }
-
 
 def largura_search(graph, start, end):
     # maintain a queue of paths
@@ -30,7 +21,13 @@ def largura_search(graph, start, end):
             new_path.append(adjacent)
             queue.append(new_path)
 
-print(largura_search(graph, '1', '11'))
+
+# print(largura_search(graph, '1', '11'))
 
 map = Map()
 map.print_matrix()
+from datetime import datetime
+print('START', datetime.utcnow())
+print(largura_search(map.get_graph(), (0, 0), (5, 5)))
+print('END  ', datetime.utcnow())
+

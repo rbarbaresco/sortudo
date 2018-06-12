@@ -6,8 +6,28 @@ import sys
 class Map:
 
     def __init__(self):
-        self.matrix = {}
+        self.matrix, self.graph = {}, {}
+        self.__create_map()
+        self.__create_graph()
 
+    def print_matrix(self):
+        sys.stdout.write('  ')
+        for line in range(len(self.matrix.items())):
+            sys.stdout.write(str(line) + ' ')
+        print()
+        for line in self.matrix.keys():
+            sys.stdout.write(str(line) + ' ')
+            for column in self.matrix[line].keys():
+                sys.stdout.write(str(self.matrix[line][column]) + ' ')
+            print()
+
+    def get_map(self):
+        return self.matrix
+
+    def get_graph(self):
+        return self.graph
+
+    def __create_map(self):
         items = [
             'V', 'V', 'V', 'V', 'V', 'X', 'X', 'X',
         ]
@@ -30,16 +50,28 @@ class Map:
                     item = items.pop(index)
                     self.matrix[i][j] = item
 
-    def print_matrix(self):
-        sys.stdout.write('  ')
-        for line in range(len(self.matrix.items())):
-            sys.stdout.write(str(line) + ' ')
-        print()
-        for line in self.matrix.keys():
-            sys.stdout.write(str(line) + ' ')
-            for column in self.matrix[line].keys():
-                sys.stdout.write(str(self.matrix[line][column]) + ' ')
-            print()
+    def __create_graph(self):
+        for i in range(0, 10):
+            for j in range(0, 10):
+                self.graph[(i, j)] = []
+                self.__append_adjacents(i, j)
 
-    def get_map(self):
-        return self.matrix
+    def __append_adjacents(self, i, j):
+        # 'UP'
+        _i = i - 1
+        if _i >= 0:
+            self.graph[(i, j)].append((_i, j))
+        # 'RIGHT'
+        _j = j + 1
+        if _j < 10:
+            self.graph[(i, j)].append((i, _j))
+        # 'DOWN'
+        _i = i + 1
+        if _i < 10:
+            self.graph[(i, j)].append((_i, j))
+        # 'LEFT'
+        _j = j - 1
+        if _j >= 0:
+            self.graph[(i, j)].append((i, _j))
+
+
